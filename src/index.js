@@ -6,8 +6,10 @@ import rootReducer from "./reducers";
 import "./index.css";
 import App from "./App";
 import registerServiceWorker from "./registerServiceWorker";
+import { verifyCredentials } from "./config/redux-token-auth-config";
 
 const store = createStore(rootReducer);
+verifyCredentials(store);
 
 ReactDOM.render(
   <Provider store={store}>
