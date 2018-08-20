@@ -1,9 +1,9 @@
 import { generateAuthActions } from "redux-token-auth";
 
 const config = {
-  authUrl: "localhost:3000/auth",
+  authUrl: "http://localhost:3000/auth",
   userAttributes: {
-    email: "E-mail",
+    id: "id",
     name: "name",
   },
   userRegistrationAttributes: {
