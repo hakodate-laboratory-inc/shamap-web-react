@@ -8,14 +8,18 @@ class Signin extends Component {
     this.submitForm = this.submitForm.bind(this);
   }
 
-  submitForm(e) {
+  submitForm = async(e) => {
     e.preventDefault();
     const { signInUser } = this.props;
     const email    = e.target.email.value,
           password = e.target.password.value;
-    signInUser({email, password})
-    .then(() => console.log("Success to login!"))
-    .catch(() => console.warn("Faild to login..."));
+    try {
+      await signInUser({email, password})
+      console.log("Success to login!");
+      window.location.href = "/map";
+    } catch(e) {
+      console.warn("Faild to login...");
+    }
   }
 
   render() {

@@ -1,23 +1,20 @@
 import React from "react";
 import ReactDOM from "react-dom";
 import { Provider } from "react-redux";
-import { createStore, applyMiddleware } from "redux";
-import thunk from "redux-thunk";
-import rootReducer from "./reducers";
+import { PersistGate } from "redux-persist/integration/react";
 import "./index.css";
+import { store, persistor } from "./configureStore";
 import Routes from "./Routes";
 import registerServiceWorker from "./registerServiceWorker";
 import { verifyCredentials } from "./config/redux-token-auth-config";
 
-const store = createStore(
-  rootReducer,
-  applyMiddleware(thunk),
-);
 verifyCredentials(store);
 
 ReactDOM.render(
   <Provider store={store}>
-    <Routes />
+    <PersistGate loading={null} persistor={persistor}>
+      <Routes />
+    </PersistGate>
   </Provider>,
   document.getElementById("root")
 );

@@ -1,6 +1,7 @@
 import * as React from "react";
-import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
+import { Router, Switch, Route } from "react-router-dom";
 import { generateRequireSignInWrapper } from "redux-token-auth";
+import { createBrowserHistory } from "history";
 import App from "./components/App";
 import Map from "./components/Map";
 import Signin from "./components/Signin";
@@ -9,6 +10,8 @@ const requireSignIn = generateRequireSignInWrapper({
   redirectPathIfNotSignedIn: "/signin",
 });
 
+const history = createBrowserHistory({});
+
 const NotFound = () => (
   <div>
     <h3>404 Not Found</h3>
@@ -16,7 +19,7 @@ const NotFound = () => (
 );
 
 export default () => (
-  <Router>
+  <Router history={history}>
     <Switch>
       <Route exact path="/" component={App} />
       <Route exact path="/map" component={requireSignIn(Map)} />
