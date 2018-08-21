@@ -1,0 +1,11 @@
+{
+  "presets": ["env", "react"],
+  "plugins": [
+    ["babel-plugin-root-import"]
+  ],
+  "env": {
+    "production": {
+      "plugins": ["babel-plugin-root-import"]
+    }
+  }
+}

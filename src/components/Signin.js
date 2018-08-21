@@ -8,7 +8,7 @@ class Signin extends Component {
     this.submitForm = this.submitForm.bind(this);
   }
 
-  submitForm = async(e) => {
+  async submitForm(e) {
     e.preventDefault();
     const { signInUser } = this.props;
     const email    = e.target.email.value,
@@ -23,7 +23,7 @@ class Signin extends Component {
   }
 
   render() {
-    const { submitForm } = this;
+    const submitForm = this.props.submitFormTest || this.submitForm;
     return (
       <div>
         <form onSubmit={submitForm}>
@@ -37,3 +37,4 @@ class Signin extends Component {
 }
 
 export default connect(null, {signInUser})(Signin);
+export { Signin as PureSignin }
