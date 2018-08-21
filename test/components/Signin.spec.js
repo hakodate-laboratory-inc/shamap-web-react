@@ -1,12 +1,15 @@
 import React from "react";
+import { stub } from "sinon";
 import { mount } from "enzyme";
 import { expect } from "chai";
 import { PureSignin as Signin } from "~/src/components/Signin";
 
 describe("Component <Signin />", () => {
-  it("Submit event when click submit", async () => {
+  it("Submit event when click submit", () => {
+    const submitForm = stub(Signin.prototype, "submitForm").returns(true);
     const wrapper = mount(<Signin />);
-    const button = wrapper.find("input[type='submit']")
-    await expect(button.length).to.equal(1);
+    wrapper.find("input[type='submit']").simulate("submit");
+    expect(submitForm.called).to.be.true;
+    submitForm.restore();
   });
 });

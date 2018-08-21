@@ -8,6 +8,6 @@ describe("Component <App />", () => {
     const wrapper = shallow(<App />);
     expect(wrapper.contains(
       <h1 className="App-title">Welcome to React</h1>
-    )).to.equal(true);
+    )).to.be.true;
   });
 });

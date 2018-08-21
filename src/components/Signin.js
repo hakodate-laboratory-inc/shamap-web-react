@@ -23,7 +23,7 @@ class Signin extends Component {
   }
 
   render() {
-    const submitForm = this.props.submitFormTest || this.submitForm;
+    const submitForm = this.submitForm;
     return (
       <div>
         <form onSubmit={submitForm}>
