@@ -4,6 +4,11 @@ before_script:
   - node --version
   - npm i
 
+cache:
+  key: ${CI_COMMIT_REF_SLUG}
+  paths:
+    - node_modules/
+
 mocha:
   script:
     - npm run test
