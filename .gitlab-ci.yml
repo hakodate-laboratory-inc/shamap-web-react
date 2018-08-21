@@ -1,0 +1,9 @@
+image: "node:8.11"
+
+before_script:
+  - node --version
+  - npm i
+
+mocha:
+  script:
+    - npm run test
