@@ -4,7 +4,7 @@ import { mount, shallow } from "enzyme";
 import { MemoryRouter } from "react-router";
 import { expect } from "chai";
 import Routes from "~/src/Routes";
-import Top from "~/src/components/App";
+import Top from "~/src/components/Top";
 import NotFound from "~/src/components/NotFound";
 
 describe("Test routing", () => {
