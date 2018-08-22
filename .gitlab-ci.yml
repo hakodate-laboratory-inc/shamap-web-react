@@ -2,7 +2,7 @@ image: "node:8.11"
 
 before_script:
   - node --version
-  - npm i -g yarn
+  - npm i -g yarn && chmod +x /usr/local/lib/node_modules/yarn/bin/yarn.js
   - yarn install
 
 cache:
