@@ -5,6 +5,7 @@ import { createBrowserHistory } from "history";
 import App from "./components/App";
 import Map from "./components/Map";
 import Signin from "./components/Signin";
+import NotFound from "./components/NotFound";
 
 const requireSignIn = generateRequireSignInWrapper({
   redirectPathIfNotSignedIn: "/signin",
@@ -12,19 +13,16 @@ const requireSignIn = generateRequireSignInWrapper({
 
 const history = createBrowserHistory({});
 
-const NotFound = () => (
-  <div>
-    <h3>404 Not Found</h3>
-  </div>
-);
-
-export default () => (
-  <Router history={history}>
-    <Switch>
-      <Route exact path="/" component={App} />
-      <Route exact path="/map" component={requireSignIn(Map)} />
-      <Route exact path="/signin" component={Signin} />
-      <Route component={NotFound} />
-    </Switch>
-  </Router>
-);
+export default props => {
+  const newhistory = props.history || history;
+  return (
+    <Router history={newhistory}>
+      <Switch>
+        <Route exact path="/" component={App} />
+        <Route exact path="/map" component={requireSignIn(Map)} />
+        <Route exact path="/signin" component={Signin} />
+        <Route component={NotFound} />
+      </Switch>
+    </Router>
+  );
+}
