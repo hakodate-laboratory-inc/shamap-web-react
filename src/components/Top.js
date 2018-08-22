@@ -1,11 +1,11 @@
 import React, { Component } from 'react';
 import logo from '../img/logo.svg';
-import './App.css';
+import './Top.css';
 
-class App extends Component {
+class Top extends Component {
   render() {
     return (
-      <div className="App">
+      <div className="Top">
         <header className="App-header">
           <img src={logo} className="App-logo" alt="logo" />
           <h1 className="App-title">Welcome to React</h1>
@@ -18,4 +18,4 @@ class App extends Component {
   }
 }
 
-export default App;
+export default Top;
