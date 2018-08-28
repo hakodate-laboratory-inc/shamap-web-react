@@ -13,6 +13,9 @@ cache:
 mocha:
   script:
     - yarn test-withcov
+  artifacts:
+    paths:
+      - coverage/
 
 pages:
   stage: deploy
