@@ -13,3 +13,16 @@ cache:
 mocha:
   script:
     - yarn test-withcov
+
+pages:
+  stage: deploy
+  dependencies:
+    - mocha
+  script:
+    - mv coverage/ public/
+  artifacts:
+    paths:
+      - public
+    expire_in: 30 days
+  only:
+    - master
