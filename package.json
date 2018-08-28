@@ -18,7 +18,7 @@
     "start": "react-scripts start",
     "build": "GENERATE_SOURCEMAP=false react-scripts build",
     "test": "mocha --require babel-core/register --require test/.setup test/**/*.spec.js",
-    "test-withcov": "nyc --reporter=text-summary mocha --require babel-core/register --require test/.setup test/**/*.spec.js",
+    "test-withcov": "nyc --reporter=html --reporter=text-summary mocha --require babel-core/register --require test/.setup test/**/*.spec.js",
     "eject": "react-scripts eject"
   },
   "devDependencies": {
