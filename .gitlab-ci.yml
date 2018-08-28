@@ -12,4 +12,4 @@ cache:
 
 mocha:
   script:
-    - yarn test
+    - yarn test-withcov
