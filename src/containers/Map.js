@@ -1,6 +1,6 @@
 import { connect } from "react-redux";
 import { apiServer } from "../config/constants";
-import { setMap, unsetMap, setPins } from "../actions/map";
+import { setMap, unsetMap, setLayers, setPins } from "../actions/map";
 import Map from "../components/Map";
 
 const mapStateToProps = state => ({
@@ -16,6 +16,10 @@ const mapDispatchToProps = dispatch => ({
       return; // Because map is notfound
     }
     dispatch(setMap(jsonMap));
+
+    const resLayer = await fetch(`${apiServer}/v1/maps/${map_slug}/layers`);
+    const jsonLayer = await resLayer.json();
+    dispatch(setLayers(jsonLayer));
 
     const resPin = await fetch(`${apiServer}/v1/maps/${map_slug}/pins`);
     const jsonPin = await resPin.json();

@@ -3,6 +3,7 @@ const initialState = {
   title: null,
   slug: null,
   description: null,
+  layers: [],
   pins: [],
 };
 
@@ -19,6 +20,11 @@ export default (state=initialState, action) => {
       };
     case "UNSET_MAP":
       return initialState;
+    case "SET_LAYERS":
+      return {
+        ...state,
+        layers: action.payload,
+      }
     case "SET_PINS":
       return {
         ...state,
