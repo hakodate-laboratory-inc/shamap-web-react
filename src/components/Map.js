@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import { Map as OSM, TileLayer, Marker } from "react-leaflet";
 
 class Map extends Component {
   componentDidMount() {
@@ -8,10 +9,23 @@ class Map extends Component {
   }
 
   render () {
-    const { match } = this.props;
+    const { match, map } = this.props;
     return (
       <div>
-        <h3>This is Map {match.params.map_slug}</h3>
+        { map.id ?
+          <div>
+            <h3>This is Map {map.slug}</h3>
+            <OSM center={[41.814262, 140.757193]} zoom={11} style={{ height: "calc(100vh - 64.44px)" }}>
+              <TileLayer
+                attribution="&amp;copy <a href=&quot;http://osm.org/copyright&quot;>OpenStreetMap</a> contributors"
+                url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
+              />
+              { map.pins.map(pin => (
+                <Marker key={pin.id} position={pin.latlng} />
+              )) }
+            </OSM>
+          </div>
+        : <p>Map "{match.params.map_slug}" is not found :(</p> }
       </div>
     );
   }
