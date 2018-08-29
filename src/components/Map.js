@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { Map as OSM, TileLayer, Marker } from "react-leaflet";
+import { Map as OSM, TileLayer, Marker, Popup } from "react-leaflet";
 import PostButton from "../containers/PostButton";
 
 class Map extends Component {
@@ -19,11 +19,15 @@ class Map extends Component {
             <PostButton map_slug={map.slug} layer_id={map.layers[0].id} />
             <OSM center={[41.814262, 140.757193]} zoom={11} style={{ height: "calc(100vh - 64.44px)" }}>
               <TileLayer
-                attribution="&amp;copy <a href=&quot;http://osm.org/copyright&quot;>OpenStreetMap</a> contributors"
+                attribution="&amp;copy <a href=&quot;http://osm.org/copyrght&quot;>OpenStreetMap</a> contributors"
                 url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
               />
               { map.pins.map(pin => (
-                <Marker key={pin.id} position={pin.latlng} />
+                <Marker key={pin.id} position={pin.latlng}>
+                  <Popup>
+                    { JSON.parse(pin.context).text }
+                  </Popup>
+                </Marker>
               )) }
             </OSM>
           </div>
