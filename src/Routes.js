@@ -3,7 +3,7 @@ import { Router, Switch, Route } from "react-router-dom";
 import { generateRequireSignInWrapper } from "redux-token-auth";
 import { createBrowserHistory } from "history";
 import Top from "./components/Top";
-import Map from "./components/Map";
+import Map from "./containers/Map";
 import Signin from "./components/Signin";
 import NotFound from "./components/NotFound";
 
@@ -19,7 +19,7 @@ export default props => {
     <Router history={newhistory}>
       <Switch>
         <Route exact path="/" component={Top} />
-        <Route exact path="/map" component={requireSignIn(Map)} />
+        <Route exact path="/map/:map_slug(\w+)" component={requireSignIn(Map)} />
         <Route exact path="/signin" component={Signin} />
         <Route component={NotFound} />
       </Switch>
