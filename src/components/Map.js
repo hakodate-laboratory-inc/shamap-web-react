@@ -26,7 +26,9 @@ class Map extends Component {
               { map.pins.length !== 0 ? map.pins.map(pin => (
                 <Marker key={pin.id} position={pin.latlng}>
                   <Popup>
-                    <img src={ `${apiServer}${pin.image_url}` } />
+                    { pin.image_url ?
+                      <img alt={pin.latlng} src={ `${apiServer}${pin.image_url}` } />
+                    : null }
                     { JSON.parse(pin.context).text }
                   </Popup>
                 </Marker>
