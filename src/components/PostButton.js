@@ -1,13 +1,25 @@
 import React, { Component } from "react";
 
 class PinPoster extends Component {
+  constructor(props) {
+    super(props);
+    this.submitCallback = this.submitCallback.bind(this);
+  }
+
+  submitCallback(e) {
+    e.preventDefault();
+    const { post, map_slug, layer } = this.props;
+    const {text, file} = e.target;
+    post(map_slug, layer.id, text.value, file.files);
+  }
+
   render() {
-    const { map_slug, layer_id, post } = this.props;
     return (
-      <div>
-        <input type="text" placeholder="テキスト" ref={node => this.text = node} />
-        <button onClick={() => post(map_slug, layer_id, this.text.value)}>送信!</button>
-      </div>
+      <form onSubmit={this.submitCallback}>
+        <input type="text" name="text" placeholder="テキスト" />
+        <input type="file" name="file" />
+        <input type="submit" />
+      </form>
     );
   }
 }
