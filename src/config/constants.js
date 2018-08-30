@@ -1,1 +1,1 @@
-export const apiServer = "http://localhost:3000"
+export const apiServer = "https://api.shamap.xyz"
