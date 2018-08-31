@@ -6,12 +6,12 @@ class Top extends Component {
   render() {
     return (
       <div className="Top">
-        <header className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          <h1 className="App-title">Welcome to React</h1>
+        <header className="Top-header">
+          <img src={logo} className="Top-logo" alt="logo" />
+          <h1 className="Top-title">Welcome to React</h1>
         </header>
-        <p className="App-intro">
-          To get started, edit <code>src/App.js</code> and save to reload.
+        <p className="Top-intro">
+          To get started, edit <code>src/Top.js</code> and save to reload.
         </p>
       </div>
     );

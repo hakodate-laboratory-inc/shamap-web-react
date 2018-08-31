@@ -1,7 +1,8 @@
 import { generateAuthActions } from "redux-token-auth";
+import { apiServer } from "./constants";
 
 const config = {
-  authUrl: "https://production.shamap.ga/auth",
+  authUrl: `${apiServer}/auth`,
   userAttributes: {
     id: "id",
     name: "name",

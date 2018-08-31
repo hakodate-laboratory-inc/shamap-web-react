@@ -16,7 +16,7 @@ class Signin extends Component {
     try {
       await signInUser({email, password})
       console.log("Success to login!");
-      window.location.href = "/map";
+      window.location.href = "/";
     } catch(e) {
       console.warn("Faild to login...");
     }

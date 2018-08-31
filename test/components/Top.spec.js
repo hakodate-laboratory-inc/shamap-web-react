@@ -7,7 +7,7 @@ describe("Component <Top />", () => {
   it("render Top", () => {
     const wrapper = shallow(<Top />);
     expect(wrapper.contains(
-      <h1 className="App-title">Welcome to React</h1>
+      <h1 className="Top-title">Welcome to React</h1>
     )).to.be.true;
   });
 });
