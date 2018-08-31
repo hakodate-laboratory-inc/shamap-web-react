@@ -5,18 +5,15 @@ import {
   Dialog,
   DialogTitle,
   DialogContent,
-  DialogContentText,
   Slide,
 } from "@material-ui/core";
 import { LocationOn } from "@material-ui/icons";
 import { theme } from "../config/ui";
 import PostForm from "../containers/PostForm";
 import { apiServer } from "../config/constants";
+import "./Map.css"
 
 const styles = {
-  map: {
-    height: "calc(100vh - 56px)",
-  },
   button: {
     position: "absolute",
     zIndex: 1000,
@@ -71,10 +68,10 @@ class Map extends Component {
             >
               <DialogTitle id="form-dialog-title">ピンを刺す</DialogTitle>
               <DialogContent>
-                <PostForm onPost={this.handleCloseForm} />
+                <PostForm onDialogClose={this.handleCloseForm} />
               </DialogContent>
             </Dialog>
-            <OSM center={[41.814262, 140.757193]} zoom={11} style={styles.map}>
+            <OSM center={[41.814262, 140.757193]} zoom={11} className="OSM">
               <TileLayer
                 attribution="&amp;copy <a href=&quot;http://osm.org/copyrght&quot;>OpenStreetMap</a> contributors"
                 url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
@@ -85,7 +82,7 @@ class Map extends Component {
                     { pin.image_url ?
                       <img alt={pin.latlng} src={ `${apiServer}${pin.image_url}` } />
                     : null }
-                    { JSON.parse(pin.context).text }
+                    <pre>{ JSON.parse(pin.context).text }</pre>
                   </Popup>
                 </Marker>
               )) : null }

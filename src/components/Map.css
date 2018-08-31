@@ -1,0 +1,15 @@
+@media screen and (max-width: 599px) {
+  .OSM {
+    height: calc(100vh - 56px);
+  }
+}
+
+@media screen and (min-width: 600px) {
+  .OSM {
+    height: calc(100vh - 64px);
+  }
+}
+
+.leaflet-popup-content img {
+  width: 200px;
+}
