@@ -14,9 +14,9 @@ const requireSignIn = generateRequireSignInWrapper({
 const history = createBrowserHistory({});
 
 export default props => {
-  const newhistory = props.history || history;
+  const newHistory = props.history || history;
   return (
-    <Router history={newhistory}>
+    <Router history={newHistory}>
       <Switch>
         <Route exact path="/" component={Top} />
         <Route exact path="/map/:map_slug(\w+)" component={requireSignIn(Map)} />
