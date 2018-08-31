@@ -6,11 +6,17 @@ class PinPoster extends Component {
     this.submitCallback = this.submitCallback.bind(this);
   }
 
-  submitCallback(e) {
+  async submitCallback(e) {
     e.preventDefault();
-    const { post, map_slug, layer } = this.props;
+    const { post, map_slug, layer, onPost } = this.props;
     const {text, file} = e.target;
-    post(map_slug, layer.id, text.value, file.files);
+    try {
+      const json = await post(map_slug, layer.id, text.value, file.files);
+      console.log(json);
+      onPost();
+    } catch(err) {
+      console.error(err);
+    }
   }
 
   render() {
@@ -25,5 +31,3 @@ class PinPoster extends Component {
 }
 
 export default PinPoster;
-
-

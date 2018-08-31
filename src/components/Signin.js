@@ -6,10 +6,8 @@ import {
   SnackbarContent,
   TextField,
 } from "@material-ui/core";
-import { createMuiTheme } from "@material-ui/core/styles";
+import { theme } from "../config/ui";
 import { signInUser } from "../config/redux-token-auth-config";
-
-const theme = createMuiTheme();
 
 const styles = {
   container: {
