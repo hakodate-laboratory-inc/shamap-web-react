@@ -9,10 +9,11 @@ import NotFound from "~/src/components/NotFound";
 
 describe("Test routing", () => {
   it("Invalid path should redirect to 404", () => {
-    const history = createMemoryHistory({ initialEntries: ["/random"] });
+    const history = createMemoryHistory({ initialEntries: ["/404"] });
     const wrapper = mount(
       <Routes history={history} />
     );
+    console.log("html: ", wrapper.html());
     expect(wrapper.containsMatchingElement(<NotFound />)).to.be.true;
     expect(wrapper.containsMatchingElement(<Top />)).to.be.false;
   });

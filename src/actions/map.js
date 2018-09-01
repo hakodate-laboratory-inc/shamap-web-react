@@ -1,3 +1,8 @@
+export const setMaps = maps => ({
+  type: "SET_MAPS",
+  payload: maps,
+});
+
 export const setMap = mapData => ({
   type: "SET_MAP",
   payload: mapData,

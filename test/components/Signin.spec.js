@@ -8,7 +8,7 @@ describe("Component <Signin />", () => {
   it("Submit event when click submit", () => {
     const submitForm = stub(Signin.prototype, "submitForm").returns(true);
     const wrapper = mount(<Signin />);
-    wrapper.find("input[type='submit']").simulate("submit");
+    wrapper.find("button[type='submit']").simulate("submit");
     expect(submitForm.called).to.be.true;
     submitForm.restore();
   });

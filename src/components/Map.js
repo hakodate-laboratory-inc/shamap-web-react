@@ -1,13 +1,54 @@
 import React, { Component } from "react";
 import { Map as OSM, TileLayer, Marker, Popup } from "react-leaflet";
-import PostButton from "../containers/PostButton";
+import {
+  Button,
+  Dialog,
+  DialogTitle,
+  DialogContent,
+  Slide,
+} from "@material-ui/core";
+import { LocationOn } from "@material-ui/icons";
+import { theme } from "../config/ui";
+import PostForm from "../containers/PostForm";
 import { apiServer } from "../config/constants";
+import "./Map.css"
+
+const styles = {
+  button: {
+    position: "absolute",
+    zIndex: 1000,
+    bottom: theme.spacing.unit,
+    left: "calc(50% - 28px)",
+    margin: theme.spacing.unit,
+  },
+};
+
+const Transition = props => (
+  <Slide direction="up" {...props} />
+);
 
 class Map extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      formOpen: false,
+    };
+    this.handleOpenForm = this.handleOpenForm.bind(this);
+    this.handleCloseForm = this.handleCloseForm.bind(this);
+  }
+
   componentDidMount() {
     const { match, fetchMap } = this.props;
     const { map_slug } = match.params;
     fetchMap(map_slug);
+  }
+
+  handleOpenForm() {
+    this.setState({ formOpen: true });
+  }
+
+  handleCloseForm() {
+    this.setState({ formOpen: false });
   }
 
   render () {
@@ -16,9 +57,21 @@ class Map extends Component {
       <div>
         { map.id ?
           <div>
-            <h3>This is Map {map.slug}</h3>
-            <PostButton map_slug={map.slug} layer={map.layers[0]} />
-            <OSM center={[41.814262, 140.757193]} zoom={11} style={{ height: "calc(100vh - 64.44px)" }}>
+            <Button variant="fab" color="primary" onClick={this.handleOpenForm} style={styles.button}>
+              <LocationOn />
+            </Button>
+            <Dialog
+              open={this.state.formOpen}
+              close={this.handleClose}
+              aria-labelledby="form-dialog-title"
+              TransitionComponent={Transition}
+            >
+              <DialogTitle id="form-dialog-title">ピンを刺す</DialogTitle>
+              <DialogContent>
+                <PostForm onDialogClose={this.handleCloseForm} />
+              </DialogContent>
+            </Dialog>
+            <OSM center={[41.814262, 140.757193]} zoom={11} className="OSM">
               <TileLayer
                 attribution="&amp;copy <a href=&quot;http://osm.org/copyrght&quot;>OpenStreetMap</a> contributors"
                 url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
@@ -29,7 +82,7 @@ class Map extends Component {
                     { pin.image_url ?
                       <img alt={pin.latlng} src={ `${apiServer}${pin.image_url}` } />
                     : null }
-                    { JSON.parse(pin.context).text }
+                    <pre>{ JSON.parse(pin.context).text }</pre>
                   </Popup>
                 </Marker>
               )) : null }
@@ -42,4 +95,3 @@ class Map extends Component {
 }
 
 export default Map;
-

@@ -1,11 +1,29 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
+import {
+  Button,
+  Snackbar,
+  SnackbarContent,
+  TextField,
+} from "@material-ui/core";
+import { theme } from "../config/ui";
 import { signInUser } from "../config/redux-token-auth-config";
+import "./Signin.css";
+
+const styles = {
+  error: {
+    backgroundColor: theme.palette.error.dark,
+  },
+};
 
 class Signin extends Component {
   constructor(props) {
     super(props);
+    this.state = {
+      snackOpen: false,
+    };
     this.submitForm = this.submitForm.bind(this);
+    this.handleSnackClose = this.handleSnackClose.bind(this);
   }
 
   async submitForm(e) {
@@ -19,18 +37,38 @@ class Signin extends Component {
       window.location.href = "/";
     } catch(e) {
       console.warn("Faild to login...");
+      this.setState({ snackOpen: true });
     }
+  }
+
+  handleSnackClose(event, reason) {
+    this.setState({ snackOpen: false });
   }
 
   render() {
     const submitForm = this.submitForm;
     return (
-      <div>
+      <div className="Signin">
         <form onSubmit={submitForm}>
-          <input type="email" name="email" />
-          <input type="password" name="password" />
-          <input type="submit" />
+          <TextField type="email" name="email" label="メールアドレス" className="SigninInput" fullWidth required />
+          <TextField type="password" name="password" label="パスワード" className="SigninInput" fullWidth required />
+          <Button type="submit" variant="contained" color="primary">ログイン</Button>
         </form>
+
+        <Snackbar
+          anchorOrigin={{
+            vertical: "bottom",
+            horizontal: "left",
+          }}
+          open={this.state.snackOpen}
+          autoHideDuration={5000}
+          onClose={this.handleSnackClose}
+        >
+          <SnackbarContent
+            style={styles.error}
+            message={<span>ログインに失敗しました</span>}
+          />
+        </Snackbar>
       </div>
     )
   }
