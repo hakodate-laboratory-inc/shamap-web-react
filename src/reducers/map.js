@@ -1,4 +1,5 @@
 const initialState = {
+  maps: [],
   id: null,
   title: null,
   slug: null,
@@ -9,6 +10,12 @@ const initialState = {
 
 export default (state=initialState, action) => {
   switch (action.type) {
+    case "SET_MAPS":
+      const maps = action.payload;
+      return {
+        ...state,
+        maps,
+      }
     case "SET_MAP":
       const { id, title, slug, description } = action.payload;
       return {

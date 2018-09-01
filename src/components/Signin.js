@@ -8,17 +8,9 @@ import {
 } from "@material-ui/core";
 import { theme } from "../config/ui";
 import { signInUser } from "../config/redux-token-auth-config";
+import "./Signin.css";
 
 const styles = {
-  container: {
-    display: "flex",
-    flexWrap: "wrap",
-  },
-  textField: {
-    margin: theme.spacing.unit,
-    width: "80%",
-    maxWidth: "500px",
-  },
   error: {
     backgroundColor: theme.palette.error.dark,
   },
@@ -56,10 +48,10 @@ class Signin extends Component {
   render() {
     const submitForm = this.submitForm;
     return (
-      <div>
-        <form style={styles.container} onSubmit={submitForm}>
-          <TextField style={styles.textField} type="email" name="email" label="メールアドレス" />
-          <TextField style={styles.textFiled} type="password" name="password" label="パスワード" />
+      <div className="Signin">
+        <form onSubmit={submitForm}>
+          <TextField type="email" name="email" label="メールアドレス" className="SigninInput" fullWidth required />
+          <TextField type="password" name="password" label="パスワード" className="SigninInput" fullWidth required />
           <Button type="submit" variant="contained" color="primary">ログイン</Button>
         </form>
 

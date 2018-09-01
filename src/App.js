@@ -25,6 +25,9 @@ const styles = {
     textDecoration: "none",
     color: "white",
   },
+  subtitle: {
+    fontSize: 15,
+  },
   menuButton: {
     marginLeft: -12,
     marginRight: 20,
@@ -41,7 +44,7 @@ const App = props => {
             <Menu />
           </IconButton>
           <Typography className={classes.flex} variant="title" color="inherit">
-            <a href="/" className={classes.title}>ShaMAP</a> { title ? `- ${title}` : null }
+            <a href="/" className={classes.title}>ShaMAP</a> <span className={classes.subtitle}>{ title ? `- ${title}` : null }</span>
           </Typography>
           { isSignedIn ?
             <div>

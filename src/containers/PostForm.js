@@ -20,11 +20,11 @@ const mapDispatchToProps = dispatch => ({
         if(images[0]) data.append("v1_pin[images]", images[0]);
         const res = await fetch(`${apiServer}/v1/maps/${map_slug}/pins`, {
           method: "POST",
-          headers: {
+          headers: new Headers({
             "access-token": localStorage.getItem("access-token"),
             "client": localStorage.getItem("client"),
             "uid": localStorage.getItem("uid"),
-          },
+          }),
           body: data,
         });
         const json = await res.json();
