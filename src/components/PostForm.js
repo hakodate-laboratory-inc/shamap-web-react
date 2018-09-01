@@ -3,7 +3,6 @@ import {
   Button,
   TextField,
 } from "@material-ui/core";
-import { theme } from "../config/ui";
 import "./PostForm.css";
 
 class PinPoster extends Component {
@@ -22,6 +21,7 @@ class PinPoster extends Component {
       onDialogClose();
     } catch(err) {
       console.error(err);
+      alert(err);
     }
   }
 
