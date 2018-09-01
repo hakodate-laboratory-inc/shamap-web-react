@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import logo from '../img/logo.svg';
 import './Top.css';
 
 class Top extends Component {
@@ -7,11 +6,11 @@ class Top extends Component {
     return (
       <div className="Top">
         <header className="Top-header">
-          <img src={logo} className="Top-logo" alt="logo" />
-          <h1 className="Top-title">Welcome to React</h1>
+          <h1 className="Top-title">ShaMAP</h1>
+          <p>Share your Map ;)</p>
         </header>
         <p className="Top-intro">
-          To get started, edit <code>src/Top.js</code> and save to reload.
+          このサイトはβ版です。不具合報告は<a href="https://twitter.com/_leo_isaac" target="_blank" rel="noopener noreferrer">Isaac</a>へ。
         </p>
       </div>
     );

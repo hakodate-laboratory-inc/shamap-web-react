@@ -1,4 +1,4 @@
-import React from "react";
+import React, { Component } from "react";
 import { connect } from "react-redux";
 import {
   AppBar,
@@ -6,6 +6,10 @@ import {
   Toolbar,
   Typography,
   IconButton,
+  Drawer,
+  List,
+  ListItem,
+  ListItemText,
 } from "@material-ui/core";
 import { withStyles } from "@material-ui/core/styles";
 import {
@@ -34,41 +38,64 @@ const styles = {
   },
 };
 
-const App = props => {
-  const { classes, title, isSignedIn } = props;
-  return (
-    <div className={classes.root}>
-      <AppBar position="static">
-        <Toolbar>
-          <IconButton className={classes.menuButton} color="inherit" aria-label="Menu">
-            <Menu />
-          </IconButton>
-          <Typography className={classes.flex} variant="title" color="inherit">
-            <a href="/" className={classes.title}>ShaMAP</a> <span className={classes.subtitle}>{ title ? `- ${title}` : null }</span>
-          </Typography>
-          { isSignedIn ?
-            <div>
-              <IconButton
-                color="inherit"
-              >
-                <AccountCircle />
-              </IconButton>
-            </div>
-          : <Button variant="contained" href="/signin">ログイン</Button> }
-        </Toolbar>
-      </AppBar>
-      <Routes />
-    </div>
-  );
-};
+class App extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      drawerShow: false,
+    };
+    this.toggleDrawer = this.toggleDrawer.bind(this);
+  }
 
-const mapStateToProps = state => {
-  console.log(state);
-  return {
-    title: state.map.title,
-    isSignedIn: state.reduxTokenAuth.currentUser.isSignedIn,
-  };
-};
+  toggleDrawer(bool) {
+    this.setState({ drawerShow: bool});
+  }
+
+  render() {
+    const { classes, title, isSignedIn } = this.props;
+    const { drawerShow } = this.state;
+    return (
+      <div className={classes.root}>
+        <AppBar position="static">
+          <Toolbar>
+            <IconButton className={classes.menuButton} color="inherit" aria-label="Menu" onClick={() => this.toggleDrawer(true)}>
+              <Menu />
+            </IconButton>
+            <Typography className={classes.flex} variant="title" color="inherit">
+              <a href="/" className={classes.title}>ShaMAP</a> <span className={classes.subtitle}>{ title ? `- ${title}` : null }</span>
+            </Typography>
+            { isSignedIn ?
+              <div>
+                <IconButton
+                  color="inherit"
+                >
+                  <AccountCircle />
+                </IconButton>
+              </div>
+            : <Button variant="contained" href="/signin">ログイン</Button> }
+          </Toolbar>
+        </AppBar>
+        <Routes />
+
+        <Drawer
+          open={drawerShow}
+          onClose={() => this.toggleDrawer(false)}
+        >
+          <List>
+            <ListItem button component="a" href="/maps">
+              <ListItemText>Maps</ListItemText>
+            </ListItem>
+          </List>
+        </Drawer>
+      </div>
+    );
+  }
+}
+
+const mapStateToProps = state => ({
+  title: state.map.title,
+  isSignedIn: state.reduxTokenAuth.currentUser.isSignedIn,
+});
 
 export default connect(mapStateToProps, null)(
   withStyles(styles)(App)
