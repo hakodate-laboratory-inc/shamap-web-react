@@ -80,7 +80,7 @@ class Map extends Component {
                 <Marker key={pin.id} position={pin.latlng}>
                   <Popup>
                     { pin.image_url ?
-                      <img alt={pin.latlng} src={ `${apiServer}${pin.image_url}` } />
+                      <img alt={pin.latlng} src={ `${apiServer}${pin.image_url.mini}` } />
                     : null }
                     <pre>{ JSON.parse(pin.context).text }</pre>
                   </Popup>
