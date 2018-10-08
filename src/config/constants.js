@@ -1,2 +1,2 @@
 export const apiServer = "https://api.shamap.xyz"
-export const wsServer = "ws://api.shamap.xyz/cable"
+export const wsServer = "wss://api.shamap.xyz/cable"
