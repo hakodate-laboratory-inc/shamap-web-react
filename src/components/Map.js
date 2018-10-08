@@ -39,15 +39,19 @@ class Map extends Component {
   }
 
   componentDidMount() {
-    const { match, fetchMap } = this.props;
+    const { match, fetchMap, addPin } = this.props;
     const { map_slug } = match.params;
     fetchMap(map_slug);
 
-    cable.subscriptions.create({ channel: "V1::MapChannel", room: map_slug }, {
-      received: data => {
-        console.log(data);
+    this.subscription = cable.subscriptions.create({ channel: "MapChannel", room: map_slug }, {
+      received(pindata) {
+        addPin(pindata.new_pin);
       },
     });
+  }
+
+  componentWillMount() {
+    this.subscription && cable.subscriptions.remove(this.subscription)
   }
 
   handleOpenForm() {

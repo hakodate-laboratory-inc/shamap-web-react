@@ -37,6 +37,14 @@ export default (state=initialState, action) => {
         ...state,
         pins: action.payload,
       };
+    case "ADD_PIN":
+      return {
+        ...state,
+        pins: [
+          ...state.pins,
+          action.payload,
+        ],
+      };
     default:
       return state;
   }

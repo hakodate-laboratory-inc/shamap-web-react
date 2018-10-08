@@ -1,3 +1,4 @@
 import ActionCable from "actioncable";
+import { wsServer } from "./constants"
 
-export default ActionCable.createConsumer("ws://localhost:3000/cable");
+export default ActionCable.createConsumer(wsServer);
