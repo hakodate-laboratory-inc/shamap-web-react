@@ -21,3 +21,8 @@ export const setPins = pinData => ({
   type: "SET_PINS",
   payload: pinData,
 });
+
+export const addPin = pinData => ({
+  type: "ADD_PIN",
+  payload: pinData,
+});

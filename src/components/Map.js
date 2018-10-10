@@ -8,6 +8,7 @@ import {
   Slide,
 } from "@material-ui/core";
 import { LocationOn } from "@material-ui/icons";
+import cable from "../config/cable"
 import { theme } from "../config/ui";
 import PostForm from "../containers/PostForm";
 import { apiServer } from "../config/constants";
@@ -38,9 +39,19 @@ class Map extends Component {
   }
 
   componentDidMount() {
-    const { match, fetchMap } = this.props;
+    const { match, fetchMap, addPin } = this.props;
     const { map_slug } = match.params;
     fetchMap(map_slug);
+
+    this.subscription = cable.subscriptions.create({ channel: "MapChannel", room: map_slug }, {
+      received(pindata) {
+        addPin(pindata.new_pin);
+      },
+    });
+  }
+
+  componentWillMount() {
+    this.subscription && cable.subscriptions.remove(this.subscription)
   }
 
   handleOpenForm() {

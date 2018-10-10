@@ -1,6 +1,6 @@
 import { connect } from "react-redux";
 import { apiServer } from "../config/constants";
-import { setMap, unsetMap, setLayers, setPins } from "../actions/map";
+import { setMap, unsetMap, setLayers, setPins, addPin } from "../actions/map";
 import Map from "../components/Map";
 
 const mapStateToProps = state => ({
@@ -28,6 +28,9 @@ const mapDispatchToProps = dispatch => ({
     } catch(err) {
       console.error(err);
     }
+  },
+  addPin: pinData => {
+    dispatch(addPin(pinData));
   },
 });
 
