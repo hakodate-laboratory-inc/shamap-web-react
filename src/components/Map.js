@@ -82,7 +82,7 @@ class Map extends Component {
                     { pin.image_url ?
                       <img alt={pin.latlng} src={ `${apiServer}${pin.image_url.mini}` } />
                     : null }
-                    <pre>{ JSON.parse(pin.context).text }</pre>
+                    <pre>{ pin.context.text }</pre>
                   </Popup>
                 </Marker>
               )) : null }
