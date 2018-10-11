@@ -30,7 +30,7 @@ class PinPoster extends Component {
     return (
       <form onSubmit={this.submitCallback} className="pinForm">
         <TextField type="text" name="text" placeholder="テキスト(複数行も可!)" rowsMax="5" multiline fullWidth required />
-        <input type="file" name="file" />
+        <input type="file" name="file" accept="image/*" />
         <Button variant="outlined" color="secondary" onClick={onDialogClose}>キャンセル</Button>
         <Button type="submit" variant="contained" color="primary">投稿</Button>
       </form>
