@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
+import { Redirect } from "react-router-dom";
 import {
   Button,
   Snackbar,
@@ -33,7 +34,7 @@ class Signin extends Component {
           password = e.target.password.value;
     try {
       await signInUser({email, password})
-      window.location.href = "/";
+      this.setState({ redirect: true });
     } catch(e) {
       this.setState({ snackOpen: true });
     }
@@ -67,6 +68,11 @@ class Signin extends Component {
             message={<span>ログインに失敗しました</span>}
           />
         </Snackbar>
+
+        { this.state.redirect ?
+          <Redirect to="/" />
+          : null
+        }
       </div>
     )
   }
