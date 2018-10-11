@@ -33,10 +33,8 @@ class Signin extends Component {
           password = e.target.password.value;
     try {
       await signInUser({email, password})
-      console.log("Success to login!");
       window.location.href = "/";
     } catch(e) {
-      console.warn("Faild to login...");
       this.setState({ snackOpen: true });
     }
   }
