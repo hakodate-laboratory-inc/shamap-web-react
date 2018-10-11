@@ -16,7 +16,6 @@ import {
   Menu,
   AccountCircle,
 } from "@material-ui/icons";
-import Routes from "./Routes";
 
 const styles = {
   root: {
@@ -75,7 +74,6 @@ class App extends Component {
             : <Button variant="contained" href="/signin">ログイン</Button> }
           </Toolbar>
         </AppBar>
-        <Routes />
 
         <Drawer
           open={drawerShow}
