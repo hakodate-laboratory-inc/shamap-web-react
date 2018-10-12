@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
-import { Link } from "react-router-dom";
+import { Link, Redirect } from "react-router-dom";
 import {
   AppBar,
   Button,
@@ -23,6 +23,7 @@ import {
   Menu as MenuIcon,
   AccountCircle,
 } from "@material-ui/icons";
+import { signOutUser } from "./config/redux-token-auth-config";
 
 const styles = {
   root: {
@@ -50,10 +51,12 @@ class Navbar extends Component {
     this.state = {
       drawerShow: false,
       accountMenu: false,
+      redirect: false,
     };
     this.toggleDrawer = this.toggleDrawer.bind(this);
     this.toggleAccountMenu = this.toggleAccountMenu.bind(this);
     this.handleAccountMenuClose = this.handleAccountMenuClose.bind(this);
+    this.signOut = this.signOut.bind(this);
   }
 
   toggleDrawer(bool) {
@@ -66,6 +69,12 @@ class Navbar extends Component {
 
   handleAccountMenuClose() {
     this.setState({ accountMenu: false });
+  }
+
+  signOut(e) {
+    e.preventDefault();
+    this.props.signOutUser()
+      .then(() => this.setState({ redirect: true }))
   }
 
   render() {
@@ -107,7 +116,7 @@ class Navbar extends Component {
                       <Paper>
                         <ClickAwayListener onClickAway={this.handleAccountMenuClose}>
                           <MenuList onClick={this.handleAccountMenuClose}>
-                            <MenuItem component={Link} to="/signout">Logout</MenuItem>
+                            <MenuItem onClick={this.signOut}>Logout</MenuItem>
                           </MenuList>
                         </ClickAwayListener>
                       </Paper>
@@ -129,6 +138,10 @@ class Navbar extends Component {
             </ListItem>
           </List>
         </Drawer>
+
+        { this.state.redirect ?
+          <Redirect to="/" />
+        : null }
       </div>
     );
   }
@@ -139,6 +152,6 @@ const mapStateToProps = state => ({
   isSignedIn: state.reduxTokenAuth.currentUser.isSignedIn,
 });
 
-export default connect(mapStateToProps, null)(
+export default connect(mapStateToProps, {signOutUser})(
   withStyles(styles)(Navbar)
 );
