@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import { Link } from "react-router-dom";
 import {
   Grid,
   Card,
@@ -32,7 +33,7 @@ class MapIndex extends Component {
               <Card style={styles.card}>
                 <CardContent>
                   <Typography variant="headline" component="h2">
-                    <a href={ `/maps/${map.slug}` }>{ map.title }</a>
+                    <Link to={ `/maps/${map.slug}` }>{ map.title }</Link>
                   </Typography>
                   <Typography component="p">{ map.description }</Typography>
                 </CardContent>

@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
+import { Link } from "react-router-dom";
 import {
   AppBar,
   Button,
@@ -16,7 +17,6 @@ import {
   Menu,
   AccountCircle,
 } from "@material-ui/icons";
-import Routes from "./Routes";
 
 const styles = {
   root: {
@@ -38,7 +38,7 @@ const styles = {
   },
 };
 
-class App extends Component {
+class Navbar extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -62,7 +62,7 @@ class App extends Component {
               <Menu />
             </IconButton>
             <Typography className={classes.flex} variant="title" color="inherit">
-              <a href="/" className={classes.title}>ShaMAP</a> <span className={classes.subtitle}>{ title ? `- ${title}` : null }</span>
+              <Link to="/" className={classes.title}>ShaMAP</Link> <span className={classes.subtitle}>{ title ? `- ${title}` : null }</span>
             </Typography>
             { isSignedIn ?
               <div>
@@ -72,17 +72,16 @@ class App extends Component {
                   <AccountCircle />
                 </IconButton>
               </div>
-            : <Button variant="contained" href="/signin">ログイン</Button> }
+            : <Button component={Link} variant="contained" to="/signin">ログイン</Button> }
           </Toolbar>
         </AppBar>
-        <Routes />
 
         <Drawer
           open={drawerShow}
           onClose={() => this.toggleDrawer(false)}
         >
-          <List>
-            <ListItem button component="a" href="/maps">
+          <List onClick={() => this.toggleDrawer(false)}>
+            <ListItem button component={Link} to="/maps">
               <ListItemText>Maps</ListItemText>
             </ListItem>
           </List>
@@ -98,5 +97,5 @@ const mapStateToProps = state => ({
 });
 
 export default connect(mapStateToProps, null)(
-  withStyles(styles)(App)
+  withStyles(styles)(Navbar)
 );
