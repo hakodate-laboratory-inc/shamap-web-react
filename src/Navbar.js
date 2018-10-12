@@ -11,10 +11,16 @@ import {
   List,
   ListItem,
   ListItemText,
+  Popper,
+  Grow,
+  Paper,
+  ClickAwayListener,
+  MenuList,
+  MenuItem,
 } from "@material-ui/core";
 import { withStyles } from "@material-ui/core/styles";
 import {
-  Menu,
+  Menu as MenuIcon,
   AccountCircle,
 } from "@material-ui/icons";
 
@@ -43,23 +49,34 @@ class Navbar extends Component {
     super(props);
     this.state = {
       drawerShow: false,
+      accountMenu: false,
     };
     this.toggleDrawer = this.toggleDrawer.bind(this);
+    this.toggleAccountMenu = this.toggleAccountMenu.bind(this);
+    this.handleAccountMenuClose = this.handleAccountMenuClose.bind(this);
   }
 
   toggleDrawer(bool) {
     this.setState({ drawerShow: bool});
   }
 
+  toggleAccountMenu() {
+    this.setState(state => ({ accountMenu: !state.accountMenu }));
+  }
+
+  handleAccountMenuClose() {
+    this.setState({ accountMenu: false });
+  }
+
   render() {
     const { classes, title, isSignedIn } = this.props;
-    const { drawerShow } = this.state;
+    const { drawerShow, accountMenu } = this.state;
     return (
       <div className={classes.root}>
         <AppBar position="static">
           <Toolbar>
             <IconButton className={classes.menuButton} color="inherit" aria-label="Menu" onClick={() => this.toggleDrawer(true)}>
-              <Menu />
+              <MenuIcon />
             </IconButton>
             <Typography className={classes.flex} variant="title" color="inherit">
               <Link to="/" className={classes.title}>ShaMAP</Link> <span className={classes.subtitle}>{ title ? `- ${title}` : null }</span>
@@ -68,9 +85,35 @@ class Navbar extends Component {
               <div>
                 <IconButton
                   color="inherit"
+                  buttonRef={node => this.accountMenuAnchor = node}
+                  aria-owns={accountMenu ? "menu-list-grow" : null}
+                  aria-haspopup="true"
+                  onClick={this.toggleAccountMenu}
                 >
                   <AccountCircle />
                 </IconButton>
+                <Popper
+                  open={accountMenu}
+                  anchorEl={this.accountMenuAnchor}
+                  style={{ zIndex: 1000 }}
+                  transition disablePortal
+                >
+                  {({ TransitionProps, placement }) => (
+                    <Grow
+                      {...TransitionProps}
+                      id="menu-list-grow"
+                      style={{ transformOrigin: placement === "bottom" ? "center top" : "center bottom" }}
+                    >
+                      <Paper>
+                        <ClickAwayListener onClickAway={this.handleAccountMenuClose}>
+                          <MenuList onClick={this.handleAccountMenuClose}>
+                            <MenuItem component={Link} to="/signout">Logout</MenuItem>
+                          </MenuList>
+                        </ClickAwayListener>
+                      </Paper>
+                    </Grow>
+                  )}
+                </Popper>
               </div>
             : <Button component={Link} variant="contained" to="/signin">ログイン</Button> }
           </Toolbar>
