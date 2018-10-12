@@ -80,7 +80,7 @@ class Navbar extends Component {
           open={drawerShow}
           onClose={() => this.toggleDrawer(false)}
         >
-          <List>
+          <List onClick={() => this.toggleDrawer(false)}>
             <ListItem button component={Link} to="/maps">
               <ListItemText>Maps</ListItemText>
             </ListItem>
