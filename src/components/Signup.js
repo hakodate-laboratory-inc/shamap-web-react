@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
-import { Link, Redirect } from "react-router-dom";
+import { Redirect } from "react-router-dom";
 import {
   Button,
   Snackbar,
@@ -8,7 +8,7 @@ import {
   TextField,
 } from "@material-ui/core";
 import { theme } from "../config/ui";
-import { signInUser } from "../config/redux-token-auth-config";
+import { registerUser } from "../config/redux-token-auth-config";
 import "./AuthForm.css";
 
 const styles = {
@@ -17,7 +17,7 @@ const styles = {
   },
 };
 
-class Signin extends Component {
+class Signup extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -29,11 +29,12 @@ class Signin extends Component {
 
   async submitForm(e) {
     e.preventDefault();
-    const { signInUser } = this.props;
-    const email    = e.target.email.value,
+    const { registerUser } = this.props;
+    const name     = e.target.name.value,
+          email    = e.target.email.value,
           password = e.target.password.value;
     try {
-      await signInUser({email, password})
+      await registerUser({name, email, password});
       this.setState({ redirect: true });
     } catch(e) {
       this.setState({ snackOpen: true });
@@ -48,16 +49,12 @@ class Signin extends Component {
     const submitForm = this.submitForm;
     return (
       <div className="AuthForm">
-        <h2>ログイン</h2>
+        <h2>ユーザ登録</h2>
         <form onSubmit={submitForm}>
+          <TextField type="text" name="name" label="ユーザ名" className="AuthInput" fullWidth required />
           <TextField type="email" name="email" label="メールアドレス" className="AuthInput" fullWidth required />
           <TextField type="password" name="password" label="パスワード" className="AuthInput" fullWidth required />
-          <Button type="submit" variant="contained" color="primary">ログイン</Button>
-
-          <div>
-            アカウントをお持ちでなければ
-            <Button variant="contained" color="secondary" component={Link} to="/signup">新規登録</Button>
-          </div>
+          <Button type="submit" variant="contained" color="secondary">ユーザ登録</Button>
         </form>
 
         <Snackbar
@@ -84,5 +81,5 @@ class Signin extends Component {
   }
 }
 
-export default connect(null, {signInUser})(Signin);
-export { Signin as PureSignin }
+export default connect(null, {registerUser})(Signup);
+export { Signup as PureSignup }
