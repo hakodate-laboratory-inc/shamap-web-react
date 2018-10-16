@@ -104,6 +104,7 @@ class Navbar extends Component {
                 <Popper
                   open={accountMenu}
                   anchorEl={this.accountMenuAnchor}
+                  placement="bottom-end"
                   style={{ zIndex: 1000 }}
                   transition disablePortal
                 >
@@ -116,7 +117,7 @@ class Navbar extends Component {
                       <Paper>
                         <ClickAwayListener onClickAway={this.handleAccountMenuClose}>
                           <MenuList onClick={this.handleAccountMenuClose}>
-                            <MenuItem onClick={this.signOut}>Logout</MenuItem>
+                            <MenuItem onClick={this.signOut}>ログアウト</MenuItem>
                           </MenuList>
                         </ClickAwayListener>
                       </Paper>
