@@ -54,10 +54,12 @@ class Signin extends Component {
           <TextField type="password" name="password" label="パスワード" className="AuthInput" fullWidth required />
           <Button type="submit" variant="contained" color="primary">ログイン</Button>
 
-          <div>
-            アカウントをお持ちでなければ
-            <Button variant="contained" color="secondary" component={Link} to="/signup">新規登録</Button>
-          </div>
+          { this.props.history ?
+            <div>
+              アカウントをお持ちでなければ
+              <Button variant="contained" color="secondary" component={Link} to="/signup">新規登録</Button>
+            </div>
+          : null }
         </form>
 
         <Snackbar
