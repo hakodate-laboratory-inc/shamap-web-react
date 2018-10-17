@@ -1,7 +1,7 @@
-.Signin {
+.AuthForm {
   padding: 16px;
 }
 
-.Signin .SigninInput {
+.AuthForm .AuthInput {
   margin-bottom: 16px;
 }

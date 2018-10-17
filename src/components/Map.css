@@ -10,6 +10,10 @@
   }
 }
 
+.leaflet-popup-content {
+  width: auto;
+}
+
 .leaflet-popup-content img {
   width: 200px;
 }

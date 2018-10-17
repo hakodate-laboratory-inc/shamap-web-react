@@ -7,6 +7,7 @@ import Top from "./components/Top";
 import MapIndex from "./containers/MapIndex";
 import Map from "./containers/Map";
 import Signin from "./components/Signin";
+import Signup from "./components/Signup";
 import NotFound from "./components/NotFound";
 
 const requireSignIn = generateRequireSignInWrapper({
@@ -24,6 +25,7 @@ export default props => {
           <Route exact path="/maps" component={MapIndex} />
           <Route exact path="/maps/:map_slug(\w+)" component={requireSignIn(Map)} />
           <Route exact path="/signin" component={Signin} />
+          <Route exact path="/signup" component={Signup} />
           <Route component={NotFound} />
         </Switch>
       </div>
