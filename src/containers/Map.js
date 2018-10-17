@@ -32,6 +32,9 @@ const mapDispatchToProps = dispatch => ({
   addPin: pinData => {
     dispatch(addPin(pinData));
   },
+  unsetMap: () => {
+    dispatch(unsetMap());
+  },
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(Map);

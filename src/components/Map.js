@@ -54,6 +54,10 @@ class Map extends Component {
     this.subscription && cable.subscriptions.remove(this.subscription)
   }
 
+  componentWillUnmount() {
+    this.props.unsetMap();
+  }
+
   handleOpenForm() {
     this.setState({ formOpen: true });
   }
