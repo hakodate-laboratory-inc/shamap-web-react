@@ -6,6 +6,7 @@ import {
   DialogTitle,
   DialogContent,
   Slide,
+  withMobileDialog,
 } from "@material-ui/core";
 import { LocationOn } from "@material-ui/icons";
 import cable from "../config/cable"
@@ -67,7 +68,7 @@ class Map extends Component {
   }
 
   render () {
-    const { match, map } = this.props;
+    const { match, map, fullScreen } = this.props;
     return (
       <div>
         { map.id ?
@@ -76,6 +77,7 @@ class Map extends Component {
               <LocationOn />
             </Button>
             <Dialog
+              fullScreen={fullScreen}
               open={this.state.formOpen}
               close={this.handleClose}
               aria-labelledby="form-dialog-title"
@@ -109,4 +111,4 @@ class Map extends Component {
   }
 }
 
-export default Map;
+export default withMobileDialog()(Map);
