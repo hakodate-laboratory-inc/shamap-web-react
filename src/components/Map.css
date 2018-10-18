@@ -11,7 +11,7 @@
 }
 
 .leaflet-popup-content {
-  width: auto;
+  width: auto !important;
 }
 
 .leaflet-popup-content img {
