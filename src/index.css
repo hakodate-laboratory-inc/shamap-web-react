@@ -3,3 +3,8 @@ body {
   padding: 0;
   font-family: sans-serif;
 }
+
+@import "./style/Top.css";
+@import "./style/AuthForm.css";
+@import "./style/Map.css";
+@import "./style/PostForm.css";
