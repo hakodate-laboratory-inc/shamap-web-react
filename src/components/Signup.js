@@ -5,7 +5,10 @@ import {
   Button,
   Snackbar,
   SnackbarContent,
-  TextField,
+  FormControl,
+  InputLabel,
+  Input,
+  FormHelperText,
 } from "@material-ui/core";
 import { theme } from "../config/ui";
 import { registerUser } from "../config/redux-token-auth-config";
@@ -22,6 +25,7 @@ class Signup extends Component {
     super(props);
     this.state = {
       snackOpen: false,
+      errors: {},
     };
     this.submitForm = this.submitForm.bind(this);
     this.handleSnackClose = this.handleSnackClose.bind(this);
@@ -37,6 +41,7 @@ class Signup extends Component {
       await registerUser({name, email, password});
       this.setState({ redirect: true });
     } catch(e) {
+      this.setState({ errors: e.response.data.errors });
       this.setState({ snackOpen: true });
     }
   }
@@ -46,14 +51,27 @@ class Signup extends Component {
   }
 
   render() {
+    const { errors } = this.state;
     const submitForm = this.submitForm;
     return (
       <div className="AuthForm">
         <h2>ユーザ登録</h2>
         <form onSubmit={submitForm}>
-          <TextField type="text" name="name" label="ユーザ名" className="AuthInput" fullWidth required />
-          <TextField type="email" name="email" label="メールアドレス" className="AuthInput" fullWidth required />
-          <TextField type="password" name="password" label="パスワード" className="AuthInput" fullWidth required />
+          <FormControl className="AuthInput"  error={errors.name} aria-describedby="name-error" fullWidth>
+            <InputLabel htmlFor="name">ユーザ名</InputLabel>
+            <Input type="text" id="name" name="name" required />
+            <FormHelperText id="name-error">{errors.name}</FormHelperText>
+          </FormControl>
+          <FormControl className="AuthInput" error={errors.email} aria-describedby="email-error" fullWidth>
+            <InputLabel htmlFor="email">メールアドレス</InputLabel>
+            <Input type="email" id="email" name="email" required />
+            <FormHelperText id="email-error">{errors.email}</FormHelperText>
+          </FormControl>
+          <FormControl className="AuthInput" error={errors.password} aria-describedby="password-error" fullWidth>
+            <InputLabel htmlFor="password">パスワード</InputLabel>
+            <Input type="password" id="password" name="password" required />
+            <FormHelperText id="password-error">{errors.password}</FormHelperText>
+          </FormControl>
           <Button type="submit" variant="contained" color="secondary">ユーザ登録</Button>
         </form>
 
@@ -68,7 +86,7 @@ class Signup extends Component {
         >
           <SnackbarContent
             style={styles.error}
-            message={<span>ログインに失敗しました</span>}
+            message={<span>新規登録に失敗しました</span>}
           />
         </Snackbar>
 
