@@ -22,6 +22,7 @@ class Signin extends Component {
     super(props);
     this.state = {
       snackOpen: false,
+      errors: {},
     };
     this.submitForm = this.submitForm.bind(this);
     this.handleSnackClose = this.handleSnackClose.bind(this);
@@ -36,6 +37,7 @@ class Signin extends Component {
       await signInUser({email, password})
       this.setState({ redirect: true });
     } catch(e) {
+      this.setState({ errors: e.response.data.errors });
       this.setState({ snackOpen: true });
     }
   }
@@ -45,13 +47,14 @@ class Signin extends Component {
   }
 
   render() {
+    const { errors } = this.state;
     const submitForm = this.submitForm;
     return (
       <div className="AuthForm">
         <h2>ログイン</h2>
         <form onSubmit={submitForm}>
-          <TextField type="email" name="email" label="メールアドレス" className="AuthInput" fullWidth required />
-          <TextField type="password" name="password" label="パスワード" className="AuthInput" fullWidth required />
+          <TextField type="email" name="email" label="メールアドレス" className="AuthInput" error={Object.keys(errors).length !== 0} fullWidth required />
+          <TextField type="password" name="password" label="パスワード" className="AuthInput" error={Object.keys(errors).length !== 0} fullWidth required />
           <Button type="submit" variant="contained" color="primary">ログイン</Button>
 
           { this.props.history ?
