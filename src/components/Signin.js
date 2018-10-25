@@ -9,7 +9,6 @@ import {
 } from "@material-ui/core";
 import { theme } from "../config/ui";
 import { signInUser } from "../config/redux-token-auth-config";
-import "./AuthForm.css";
 
 const styles = {
   error: {

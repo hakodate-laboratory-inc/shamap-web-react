@@ -5,7 +5,6 @@ import {
   CircularProgress,
 } from "@material-ui/core";
 import { theme } from "../config/ui";
-import "./PostForm.css";
 
 const styles = {
   wrapper: {

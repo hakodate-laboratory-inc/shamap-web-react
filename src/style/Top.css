@@ -2,11 +2,6 @@
   text-align: center;
 }
 
-.Top-logo {
-  animation: Top-logo-spin infinite 20s linear;
-  height: 80px;
-}
-
 .Top-header {
   background-color: #222;
   height: 150px;
@@ -20,9 +15,4 @@
 
 .Top-intro {
   font-size: large;
-}
-
-@keyframes Top-logo-spin {
-  from { transform: rotate(0deg); }
-  to { transform: rotate(360deg); }
 }

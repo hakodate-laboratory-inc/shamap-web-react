@@ -13,7 +13,6 @@ import cable from "../config/cable"
 import { theme } from "../config/ui";
 import PostForm from "../containers/PostForm";
 import { apiServer } from "../config/constants";
-import "./Map.css"
 
 const styles = {
   button: {
