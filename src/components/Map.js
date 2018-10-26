@@ -2,6 +2,8 @@ import React, { Component } from "react";
 import { Map as OSM, TileLayer, Marker, Popup } from "react-leaflet";
 import {
   Button,
+  Card,
+  CardContent,
   Dialog,
   DialogTitle,
   DialogContent,
@@ -87,7 +89,7 @@ class Map extends Component {
                 <PostForm onDialogClose={this.handleCloseForm} />
               </DialogContent>
             </Dialog>
-            <OSM center={[41.814262, 140.757193]} zoom={11} className="OSM">
+            <OSM center={[41.814262, 140.757193]} zoom={11} zoomControl={false} className="OSM">
               <TileLayer
                 attribution="&amp;copy <a href=&quot;http://osm.org/copyrght&quot;>OpenStreetMap</a> contributors"
                 url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
@@ -95,10 +97,9 @@ class Map extends Component {
               { map.pins.length !== 0 ? map.pins.map(pin => (
                 <Marker key={pin.id} position={pin.latlng}>
                   <Popup>
-                    { pin.image_url ?
-                      <img alt={pin.latlng} src={ `${apiServer}${pin.image_url.mini}` } />
-                    : null }
-                    <pre>{ pin.context.text }</pre>
+                    <Card className="pinCard" style={{ backgroundImage: pin.image_url ? `url(${apiServer}${pin.image_url.mini})` : null }}>
+                      <div>{ pin.context.text }</div>
+                    </Card>
                   </Popup>
                 </Marker>
               )) : null }
