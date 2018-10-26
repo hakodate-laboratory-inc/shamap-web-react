@@ -36,12 +36,16 @@ class Signup extends Component {
     const { registerUser } = this.props;
     const name     = e.target.name.value,
           email    = e.target.email.value,
-          password = e.target.password.value;
+          password = e.target.password.value,
+          confirmPassword = e.target.confirmPassword.value;
     try {
+      await (() => {
+        if(password !== confirmPassword) throw({ confirmPassword: ["Wrong password"] });
+      })();
       await registerUser({name, email, password});
       this.setState({ redirect: true });
     } catch(e) {
-      this.setState({ errors: e.response.data.errors });
+      this.setState({ errors: e.response ? e.response.data.errors : e });
       this.setState({ snackOpen: true });
     }
   }
@@ -67,11 +71,17 @@ class Signup extends Component {
             <Input type="email" id="email" name="email" required />
             <FormHelperText id="email-error">{errors.email}</FormHelperText>
           </FormControl>
-          <FormControl className="AuthInput" error={errors.password} aria-describedby="password-error" fullWidth>
+          <FormControl className="AuthInput" error={errors.password || errors.confirmPassword} aria-describedby="password-error" fullWidth>
             <InputLabel htmlFor="password">パスワード</InputLabel>
             <Input type="password" id="password" name="password" required />
             <FormHelperText id="password-error">{errors.password}</FormHelperText>
           </FormControl>
+          <FormControl className="AuthInput" error={errors.password || errors.confirmPassword} aria-describedby="confirm-password-error" fullWidth>
+            <InputLabel htmlFor="confirm-password">パスワード確認</InputLabel>
+            <Input type="password" id="confirm-password" name="confirmPassword" required />
+            <FormHelperText id="confirm-password-error">{errors.confirmPassword}</FormHelperText>
+          </FormControl>
+
           <Button type="submit" variant="contained" color="secondary">ユーザ登録</Button>
         </form>
 
