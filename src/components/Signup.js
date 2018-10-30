@@ -19,6 +19,19 @@ const styles = {
   },
 };
 
+class PasswordError extends Error {
+  constructor(message, ...params) {
+    super(...params);
+
+    if(Error.captureStackTrace) {
+      Error.captureStackTrace(this, PasswordError);
+    }
+
+    this.name = null;
+    this.confirmPassword = message;
+  }
+}
+
 class Signup extends Component {
   constructor(props) {
     super(props);
@@ -39,7 +52,7 @@ class Signup extends Component {
           confirmPassword = e.target.confirmPassword.value;
     try {
       await (() => {
-        if(password !== confirmPassword) throw({ confirmPassword: ["Wrong password"] });
+        if(password !== confirmPassword) throw new PasswordError("Wrong password");
       })();
       await registerUser({name, email, password});
       this.setState({ redirect: true });
