@@ -34,8 +34,13 @@
 .pinCard div {
   position: absolute;
   bottom: 0;
-  width: 100%;
+  width: calc(100% - 24px);
+  padding: 0 12px;
   color: white;
   background-color: rgba(0, 0, 0, 0.5);
   overflow-wrap: break-word;
+}
+
+.pinCard .date {
+  margin-right: 15px;
 }

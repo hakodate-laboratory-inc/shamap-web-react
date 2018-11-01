@@ -3,7 +3,6 @@ import { Map as OSM, TileLayer, Marker, Popup } from "react-leaflet";
 import {
   Button,
   Card,
-  CardContent,
   Dialog,
   DialogTitle,
   DialogContent,
@@ -11,6 +10,8 @@ import {
   withMobileDialog,
 } from "@material-ui/core";
 import { LocationOn } from "@material-ui/icons";
+import moment from "moment";
+import "moment/locale/ja";
 import cable from "../config/cable"
 import { theme } from "../config/ui";
 import PostForm from "../containers/PostForm";
@@ -98,7 +99,15 @@ class Map extends Component {
                 <Marker key={pin.id} position={pin.latlng}>
                   <Popup>
                     <Card className="pinCard" style={{ backgroundImage: pin.image_url ? `url(${apiServer}${pin.image_url.mini})` : null }}>
-                      <div>{ pin.context.text }</div>
+                      <div>
+                        <p>{ pin.context.text }</p>
+                        <p>
+                          <span className="date">
+                            { moment(pin.created_at).format("YYYY/M/D H:m") }
+                          </span>
+                          <span>{ pin.username }</span>
+                        </p>
+                      </div>
                     </Card>
                   </Popup>
                 </Marker>
