@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import L from "leaflet";
 import { Map as OSM, TileLayer, Marker, Popup } from "react-leaflet";
 import {
   Button,
@@ -30,6 +31,13 @@ const styles = {
 const Transition = props => (
   <Slide direction="up" {...props} />
 );
+
+const PinIcon = (src) => {
+  console.log(src);
+  return new L.Icon({
+    iconUrl: src ? `${apiServer}${src.mini}` : "https://leafletjs.com/examples/custom-icons/leaf-red.png",
+  })
+}
 
 class Map extends Component {
   constructor(props) {
@@ -96,7 +104,7 @@ class Map extends Component {
                 url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
               />
               { map.pins.length !== 0 ? map.pins.map(pin => (
-                <Marker key={pin.id} position={pin.latlng}>
+                <Marker key={pin.id} position={pin.latlng} icon={PinIcon(pin.image_url)}>
                   <Popup>
                     <Card className="pinCard" style={{ backgroundImage: pin.image_url ? `url(${apiServer}${pin.image_url.mini})` : null }}>
                       <div>

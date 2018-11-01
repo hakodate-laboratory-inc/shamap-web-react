@@ -20,6 +20,13 @@
 .leaflet-popup-content-wrapper, .leaflet-popup-tip {
   background: none !important;
   box-shadow: none !important;
+  pointer-events: none;
+}
+
+.leaflet-marker-icon {
+  height: 100px;
+  width: 100px;
+  object-fit: cover
 }
 
 .pinCard {
@@ -29,6 +36,7 @@
   background-repeat: no-repeat;
   background-position: center center;
   background-size: cover;
+  pointer-events: auto;
 }
 
 .pinCard div {
