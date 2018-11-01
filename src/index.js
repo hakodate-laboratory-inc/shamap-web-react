@@ -2,7 +2,7 @@ import React from "react";
 import ReactDOM from "react-dom";
 import { Provider } from "react-redux";
 import { PersistGate } from "redux-persist/integration/react";
-import "./index.css";
+import "./index.scss";
 import { store, persistor } from "./configureStore";
 import Routes from "./Routes";
 import registerServiceWorker from "./registerServiceWorker";
