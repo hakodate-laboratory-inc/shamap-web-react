@@ -86,7 +86,7 @@ class Signup extends Component {
           <FormControl className="AuthInput" error={errors.password || errors.confirmPassword} aria-describedby="password-error" fullWidth>
             <InputLabel htmlFor="password">パスワード</InputLabel>
             <Input type="password" id="password" name="password" required />
-            <FormHelperText id="password-error">{errors.password}</FormHelperText>
+            <FormHelperText id="password-error">{errors.password || "8文字以上"}</FormHelperText>
           </FormControl>
           <FormControl className="AuthInput" error={errors.password || errors.confirmPassword} aria-describedby="confirm-password-error" fullWidth>
             <InputLabel htmlFor="confirm-password">パスワード確認</InputLabel>
