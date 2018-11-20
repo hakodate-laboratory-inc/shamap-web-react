@@ -19,6 +19,19 @@ const styles = {
   },
 };
 
+class PasswordError extends Error {
+  constructor(message, ...params) {
+    super(...params);
+
+    if(Error.captureStackTrace) {
+      Error.captureStackTrace(this, PasswordError);
+    }
+
+    this.name = null;
+    this.confirmPassword = message;
+  }
+}
+
 class Signup extends Component {
   constructor(props) {
     super(props);
@@ -39,7 +52,7 @@ class Signup extends Component {
           confirmPassword = e.target.confirmPassword.value;
     try {
       await (() => {
-        if(password !== confirmPassword) throw({ confirmPassword: ["Wrong password"] });
+        if(password !== confirmPassword) throw new PasswordError("Wrong password");
       })();
       await registerUser({name, email, password});
       this.setState({ redirect: true });
@@ -73,7 +86,7 @@ class Signup extends Component {
           <FormControl className="AuthInput" error={errors.password || errors.confirmPassword} aria-describedby="password-error" fullWidth>
             <InputLabel htmlFor="password">パスワード</InputLabel>
             <Input type="password" id="password" name="password" required />
-            <FormHelperText id="password-error">{errors.password}</FormHelperText>
+            <FormHelperText id="password-error">{errors.password || "8文字以上"}</FormHelperText>
           </FormControl>
           <FormControl className="AuthInput" error={errors.password || errors.confirmPassword} aria-describedby="confirm-password-error" fullWidth>
             <InputLabel htmlFor="confirm-password">パスワード確認</InputLabel>

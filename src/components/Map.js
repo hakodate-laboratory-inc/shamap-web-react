@@ -1,7 +1,9 @@
 import React, { Component } from "react";
+import L from "leaflet";
 import { Map as OSM, TileLayer, Marker, Popup } from "react-leaflet";
 import {
   Button,
+  Card,
   Dialog,
   DialogTitle,
   DialogContent,
@@ -9,6 +11,8 @@ import {
   withMobileDialog,
 } from "@material-ui/core";
 import { LocationOn } from "@material-ui/icons";
+import moment from "moment";
+import "moment/locale/ja";
 import cable from "../config/cable"
 import { theme } from "../config/ui";
 import PostForm from "../containers/PostForm";
@@ -27,6 +31,13 @@ const styles = {
 const Transition = props => (
   <Slide direction="up" {...props} />
 );
+
+const PinIcon = (src) => {
+  console.log(src);
+  return new L.Icon({
+    iconUrl: src ? `${apiServer}${src.mini}` : "https://leafletjs.com/examples/custom-icons/leaf-red.png",
+  })
+}
 
 class Map extends Component {
   constructor(props) {
@@ -87,18 +98,25 @@ class Map extends Component {
                 <PostForm onDialogClose={this.handleCloseForm} />
               </DialogContent>
             </Dialog>
-            <OSM center={[41.814262, 140.757193]} zoom={11} className="OSM">
+            <OSM center={[41.814262, 140.757193]} zoom={11} zoomControl={false} className="OSM">
               <TileLayer
                 attribution="&amp;copy <a href=&quot;http://osm.org/copyrght&quot;>OpenStreetMap</a> contributors"
                 url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
               />
               { map.pins.length !== 0 ? map.pins.map(pin => (
-                <Marker key={pin.id} position={pin.latlng}>
+                <Marker key={pin.id} position={pin.latlng} icon={PinIcon(pin.image_url)}>
                   <Popup>
-                    { pin.image_url ?
-                      <img alt={pin.latlng} src={ `${apiServer}${pin.image_url.mini}` } />
-                    : null }
-                    <pre>{ pin.context.text }</pre>
+                    <Card className="pinCard" style={{ backgroundImage: pin.image_url ? `url(${apiServer}${pin.image_url.mini})` : null }}>
+                      <div>
+                        <p>{ pin.context.text }</p>
+                        <p>
+                          <span className="date">
+                            { moment(pin.created_at).format("YYYY/M/D H:m") }
+                          </span>
+                          <span>{ pin.username }</span>
+                        </p>
+                      </div>
+                    </Card>
                   </Popup>
                 </Marker>
               )) : null }
