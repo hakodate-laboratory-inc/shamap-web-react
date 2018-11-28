@@ -82,7 +82,7 @@ class Navbar extends Component {
     const { drawerShow, accountMenu } = this.state;
     return (
       <div className={classes.root}>
-        <AppBar position="static">
+        <AppBar color="primary" position="static">
           <Toolbar>
             <IconButton className={classes.menuButton} color="inherit" aria-label="Menu" onClick={() => this.toggleDrawer(true)}>
               <MenuIcon />
