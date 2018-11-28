@@ -88,7 +88,7 @@ class Navbar extends Component {
               <MenuIcon />
             </IconButton>
             <Typography className={classes.flex} variant="title" color="inherit">
-              <Link to="/" className={classes.title}>ShaMAP</Link> <span className={classes.subtitle}>{ title ? `- ${title}` : null }</span>
+              <span className={classes.title}>{ title || "ShaMAP" }</span>
             </Typography>
             { isSignedIn ?
               <div>
