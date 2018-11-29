@@ -8,9 +8,9 @@ class Top extends Component {
         <header>
           <img src={Img} alt="利用イメージ"/>
           <div className="greeting">
-            <h1>フィールドワークでもっと自由に共有を</h1>
+            <h1>フィールドワークでもっと自由に共有を。</h1>
             <p>ShaMAPは、共有マップに直接発見を共有できます。</p>
-            <a>はじめる</a>
+            <a href='#'>はじめる</a>
           </div>
         </header>
         <div id="about">
@@ -31,6 +31,9 @@ class Top extends Component {
           <h2>お問い合わせ</h2>
           <p>サービスに関するお問い合わせはこちら</p>
         </div>
+        <footer>
+          <p>© 2018 函館ラボラトリ</p>
+        </footer>
       </div>
     );
   }
