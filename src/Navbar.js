@@ -82,13 +82,13 @@ class Navbar extends Component {
     const { drawerShow, accountMenu } = this.state;
     return (
       <div className={classes.root}>
-        <AppBar position="static">
+        <AppBar color="primary" position="static">
           <Toolbar>
             <IconButton className={classes.menuButton} color="inherit" aria-label="Menu" onClick={() => this.toggleDrawer(true)}>
               <MenuIcon />
             </IconButton>
             <Typography className={classes.flex} variant="title" color="inherit">
-              <Link to="/" className={classes.title}>ShaMAP</Link> <span className={classes.subtitle}>{ title ? `- ${title}` : null }</span>
+              <span className={classes.title}>{ title || "ShaMAP" }</span>
             </Typography>
             { isSignedIn ?
               <div>
