@@ -2,9 +2,13 @@ $shamap_orange: #FA6705
 
 #Top
   color: #333
+  @media screen and (max-width: 767px)
+    br
+      display: none
   *
     margin: 0
     padding: 0
+    line-height: 1.5em
   header
     display: flex
     justify-content: center
@@ -14,6 +18,10 @@ $shamap_orange: #FA6705
     height: 50vh
     min-height: 33vw
     position: relative
+    font-feature-settings : "palt"
+    @media screen and (max-width: 767px)
+      flex-direction: column
+      min-height: fit-content
     &::before
       content: ''
       position: absolute
@@ -30,6 +38,10 @@ $shamap_orange: #FA6705
       height: 37.5vw
       filter: drop-shadow(0px 0px 4px #000)
       z-index: 1111
+      @media screen and (max-width: 767px)
+        height: auto
+        width: 90vw
+        margin: -1rem 0
     .greeting
       display: flex
       flex-direction: column
@@ -38,6 +50,16 @@ $shamap_orange: #FA6705
       p
         filter: drop-shadow(0px 0px 4px #000)
         margin-right: 1rem
+        @media screen and (max-width: 767px)
+          width: fit-content
+      @media screen and (max-width: 767px)
+        h1
+          line-height: 1.2em
+          font-size: 1.9rem
+          margin: 0 1rem 0
+      @media screen and (max-width: 767px)
+        p
+          margin: 1rem 1rem 0
       a
         flex: none
         display: inline-block
@@ -51,6 +73,10 @@ $shamap_orange: #FA6705
         transition: .3s
         &:hover
           filter: drop-shadow(0px 0px 0px #000)
+        @media screen and (max-width: 767px)
+          width: auto
+          margin: 1rem
+          text-align: center
   #about,
   #news,
   #price,
@@ -75,10 +101,15 @@ $shamap_orange: #FA6705
       justify-content: center
       align-items: baseline
       width: 100%
+      @media screen and (max-width: 767px)
+        flex-direction: column
       li
         flex: 1
         list-style-type: none
         padding: 1rem
+        @media screen and (max-width: 767px)
+          padding: 0
+          margin-top: 2rem
         h4
           text-align: center
           margin: 0 auto .5rem
