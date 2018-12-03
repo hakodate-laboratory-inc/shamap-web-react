@@ -57,7 +57,7 @@ class Top extends Component {
         </div>
         <div id="contact">
           <h2>お問い合わせ</h2>
-          <p>サービスに関するお問い合わせは<a href='mailto:jmb.nakamura@hakolab.co.jp'>こちら</a>まで。</p>
+          <p>サービスに関するお問い合わせは<a href='mailto:jmb.nakamura@hakolab.co.jp'>こちら</a>まで。(メーラーが起動します。)</p>
         </div>
         <footer>
           <p>© 2018 函館ラボラトリ</p>
