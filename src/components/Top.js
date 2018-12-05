@@ -1,13 +1,15 @@
 import React, { Component } from 'react';
 import { Link } from "react-router-dom";
-import Img from '../img/mockup.png';
+import imgMock from '../img/mockup.png';
+import imgShare from '../img/share.png';
+import imgSimple from '../img/simple.png';
 
 class Top extends Component {
   render() {
     return (
       <div id ="Top">
         <header>
-          <img src={Img} alt="利用イメージ"/>
+          <img src={imgMock} alt="利用イメージ"/>
           <div className="greeting">
             <h1>フィールドワークでもっと自由に共有を。</h1>
             <p>ShaMAPは、特定の場所に写真や文章を投稿できるWebサービスです。</p>
@@ -21,10 +23,12 @@ class Top extends Component {
           <h3>特徴</h3>
           <ul>
             <li>
+              <img src={imgSimple} alt="シンプルな道具"/>
               <h4>シンプルな道具</h4>
               <p>ShaMAPに必要なものは、スマートフォンやPCなどのインターネットに接続できる機材のみです。従来、筆記用具やカメラを用いて行っていた記録と共有が簡単に行えます。</p>
             </li>
             <li>
+              <img src={imgShare} alt="リアルタイムな共有"/>
               <h4>リアルタイムな共有</h4>
               <p>ShaMAPでは、投稿した瞬間に全ての端末に同じ情報が共有されます。従来の同様の活動に比べ、より広いコミュニティと直接的な情報共有が可能になります。</p>
             </li>
@@ -41,7 +45,7 @@ class Top extends Component {
             </li>
             <li>
               <h4>旅行の記録</h4>
-              <p>写真をアップロードするだけで、自然と地図上でどこに行ったのかが分かるようになります。</p>
+              <p>写真をアップロードするだけで、自然と地図上でどこに行ったのかが分かるようになります。ルートや思い出の共有も簡単になるでしょう。</p>
             </li>
           </ul>
         </div>
