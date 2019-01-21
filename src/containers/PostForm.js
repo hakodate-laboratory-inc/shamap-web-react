@@ -12,7 +12,7 @@ const mapDispatchToProps = dispatch => ({
   post: (map_slug, layer_id, text, images) => {
     return new Promise(async(resolve, reject) => {
       try {
-        const position = await getLocation();
+        const position = await getLocation(images);
         const data = new FormData();
         data.append("v1_pin[layer_id]", layer_id);
         data.append("v1_pin[location]", `POINT(${position.join(" ")})`);

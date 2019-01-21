@@ -32,12 +32,9 @@ const Transition = props => (
   <Slide direction="up" {...props} />
 );
 
-const PinIcon = (src) => {
-  console.log(src);
-  return new L.Icon({
-    iconUrl: src ? `${apiServer}${src.mini}` : "https://leafletjs.com/examples/custom-icons/leaf-red.png",
-  })
-}
+const PinIcon = (src) => new L.Icon({
+  iconUrl: src ? `${apiServer}${src.mini}` : "https://leafletjs.com/examples/custom-icons/leaf-red.png",
+})
 
 class Map extends Component {
   constructor(props) {
