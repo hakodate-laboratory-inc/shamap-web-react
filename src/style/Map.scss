@@ -42,7 +42,7 @@
   pointer-events: auto;
 }
 
-.pinCard div {
+.pinCard .card {
   position: absolute;
   bottom: 0;
   width: calc(100% - 24px);
@@ -54,4 +54,11 @@
 
 .pinCard .date {
   margin-right: 15px;
+}
+
+.pinCard .delete {
+  position: absolute;
+  bottom: 18px;
+  right: 18px;
+  color: white;
 }

@@ -75,7 +75,8 @@ class Map extends Component {
   }
 
   render () {
-    const { match, map, fullScreen } = this.props;
+    const { match, map, fullScreen, user, deletePin } = this.props;
+    const { map_slug } = match.params;
     return (
       <div>
         { map.id ?
@@ -104,22 +105,25 @@ class Map extends Component {
                 <Marker key={pin.id} position={pin.latlng} icon={PinIcon(pin.image_url)}>
                   <Popup>
                     <Card className="pinCard" style={{ backgroundImage: pin.image_url ? `url(${apiServer}${pin.image_url.mini})` : null }}>
-                      <div>
+                      <div className="card">
                         <p>{ pin.context.text }</p>
                         <p>
                           <span className="date">
                             { moment(pin.created_at).format("YYYY/M/D H:m") }
                           </span>
-                          <span>{ pin.username }</span>
+                          <span>{ pin.user.name }</span>
                         </p>
                       </div>
+                      { pin.user.id === user.id ?
+                        <div className="delete" onClick={() => deletePin(map_slug, pin.id)}>[削除]</div>
+                      : null }
                     </Card>
                   </Popup>
                 </Marker>
               )) : null }
             </OSM>
           </div>
-        : <p>Map "{match.params.map_slug}" is not found :(</p> }
+        : <p>Map {map_slug} is not found :(</p> }
       </div>
     );
   }

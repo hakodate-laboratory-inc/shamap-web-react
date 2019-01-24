@@ -5,6 +5,7 @@ import Map from "../components/Map";
 
 const mapStateToProps = state => ({
   map: state.map,
+  user: state.reduxTokenAuth.currentUser.attributes,
 });
 
 const mapDispatchToProps = dispatch => ({
@@ -34,6 +35,25 @@ const mapDispatchToProps = dispatch => ({
   },
   unsetMap: () => {
     dispatch(unsetMap());
+  },
+  deletePin: async (map_slug, id) => {
+    try {
+      const res = await fetch(`${apiServer}/v1/maps/${map_slug}/pins/${id}`, {
+        method: "DELETE",
+        headers: new Headers({
+          "access-token": localStorage.getItem("access-token"),
+          "client": localStorage.getItem("client"),
+          "uid": localStorage.getItem("uid"),
+        }),
+      });
+      if (res.ok) {
+        alert("削除が完了しました");
+      } else {
+        alert("削除に失敗しましてん...");
+      }
+    } catch(e) {
+      alert(e);
+    }
   },
 });
 
