@@ -7,6 +7,10 @@ Web viewer for ShaMAP.
 
 ## Development
 ```shell
+cat <<EOF > .env
+REACT_APP_SHAMAP_ADMIN_IDS=uuids
+EOF
+
 yarn install
 yarn start
 yarn test -w # In another window

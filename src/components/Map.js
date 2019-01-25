@@ -114,7 +114,7 @@ class Map extends Component {
                           <span>{ pin.user.name }</span>
                         </p>
                       </div>
-                      { pin.user.id === user.id ?
+                      { pin.user.id === user.id || process.env.REACT_APP_SHAMAP_ADMIN_IDS.split(",").includes(user.id) ?
                         <div className="delete" onClick={() => deletePin(map_slug, pin.id)}>[削除]</div>
                       : null }
                     </Card>
