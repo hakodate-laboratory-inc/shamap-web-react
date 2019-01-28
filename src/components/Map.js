@@ -10,7 +10,7 @@ import {
   Slide,
   withMobileDialog,
 } from "@material-ui/core";
-import { LocationOn } from "@material-ui/icons";
+import { LocationOn, DeleteForever } from "@material-ui/icons";
 import moment from "moment";
 import "moment/locale/ja";
 import cable from "../config/cable"
@@ -75,9 +75,9 @@ class Map extends Component {
   }
 
   render () {
-    const { match, map, fullScreen, user, deletePin } = this.props;
+    const { match, map, fullScreen, currentUser, deletePin } = this.props;
     const { map_slug } = match.params;
-    const isAdmin = process.env.REACT_APP_SHAMAP_ADMIN_IDS.split(",").includes(user.id);
+    const isAdmin = process.env.REACT_APP_SHAMAP_ADMIN_IDS.split(",").includes(currentUser.id);
     return (
       <div>
         { map.id ?
@@ -112,11 +112,13 @@ class Map extends Component {
                           <span className="date">
                             { moment(pin.created_at).format("YYYY/M/D H:m") }
                           </span>
-                          <span>{ pin.user.name }</span>
+                          <span>{ pin.author.name }</span>
                         </p>
                       </div>
-                      { pin.user.id === user.id || isAdmin ?
-                        <div className="delete" onClick={() => deletePin(map_slug, pin.id)}>[削除]</div>
+                      { pin.author.id === currentUser.id || isAdmin ?
+                        <Button className="delete" variant="contained" color="secondary" size="small" onClick={() => deletePin(map_slug, pin.id)}>
+                          <DeleteForever />
+                        </Button>
                       : null }
                     </Card>
                   </Popup>
