@@ -77,6 +77,7 @@ class Map extends Component {
   render () {
     const { match, map, fullScreen, user, deletePin } = this.props;
     const { map_slug } = match.params;
+    const isAdmin = process.env.REACT_APP_SHAMAP_ADMIN_IDS.split(",").includes(user.id);
     return (
       <div>
         { map.id ?
@@ -114,7 +115,7 @@ class Map extends Component {
                           <span>{ pin.user.name }</span>
                         </p>
                       </div>
-                      { pin.user.id === user.id || process.env.REACT_APP_SHAMAP_ADMIN_IDS.split(",").includes(user.id) ?
+                      { pin.user.id === user.id || isAdmin ?
                         <div className="delete" onClick={() => deletePin(map_slug, pin.id)}>[削除]</div>
                       : null }
                     </Card>
