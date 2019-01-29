@@ -52,7 +52,7 @@ const mapDispatchToProps = dispatch => ({
       if (res.ok) {
         alert("削除が完了しました");
       } else {
-        alert("削除に失敗しましてん...");
+        alert("削除に失敗しました...運営にお問い合わせください");
       }
     } catch(e) {
       alert(e);
