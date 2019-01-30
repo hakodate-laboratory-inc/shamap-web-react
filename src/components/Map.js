@@ -10,7 +10,7 @@ import {
   Slide,
   withMobileDialog,
 } from "@material-ui/core";
-import { LocationOn } from "@material-ui/icons";
+import { LocationOn, DeleteForever } from "@material-ui/icons";
 import moment from "moment";
 import "moment/locale/ja";
 import cable from "../config/cable"
@@ -75,7 +75,11 @@ class Map extends Component {
   }
 
   render () {
-    const { match, map, fullScreen } = this.props;
+    const { match, map, fullScreen, currentUser, deletePin } = this.props;
+    const { map_slug } = match.params;
+    const isAdmin = process.env.REACT_APP_SHAMAP_ADMIN_IDS ?
+      process.env.REACT_APP_SHAMAP_ADMIN_IDS.split(",").includes(currentUser.id) :
+      false;
     return (
       <div>
         { map.id ?
@@ -104,22 +108,27 @@ class Map extends Component {
                 <Marker key={pin.id} position={pin.latlng} icon={PinIcon(pin.image_url)}>
                   <Popup>
                     <Card className="pinCard" style={{ backgroundImage: pin.image_url ? `url(${apiServer}${pin.image_url.mini})` : null }}>
-                      <div>
+                      <div className="card">
                         <p>{ pin.context.text }</p>
                         <p>
                           <span className="date">
                             { moment(pin.created_at).format("YYYY/M/D H:m") }
                           </span>
-                          <span>{ pin.username }</span>
+                          <span>{ pin.author.name }</span>
                         </p>
                       </div>
+                      { pin.author.id === currentUser.id || isAdmin ?
+                        <Button className="delete" variant="contained" color="secondary" size="small" onClick={() => deletePin(map_slug, pin.id)}>
+                          <DeleteForever />
+                        </Button>
+                      : null }
                     </Card>
                   </Popup>
                 </Marker>
               )) : null }
             </OSM>
           </div>
-        : <p>Map "{match.params.map_slug}" is not found :(</p> }
+        : <p>Map {map_slug} is not found :(</p> }
       </div>
     );
   }
