@@ -77,7 +77,9 @@ class Map extends Component {
   render () {
     const { match, map, fullScreen, currentUser, deletePin } = this.props;
     const { map_slug } = match.params;
-    const isAdmin = process.env.REACT_APP_SHAMAP_ADMIN_IDS.split(",").includes(currentUser.id);
+    const isAdmin = process.env.REACT_APP_SHAMAP_ADMIN_IDS ?
+      process.env.REACT_APP_SHAMAP_ADMIN_IDS.split(",").includes(currentUser.id) :
+      false;
     return (
       <div>
         { map.id ?
